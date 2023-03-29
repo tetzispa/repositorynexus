@@ -1,0 +1,16 @@
+- name: backup repository file
+  copy:
+    src: /etc/apt/sources.list
+    dest: /etc/apt/sources.list.bkp
+    owner: root
+    group: root
+    mode: '0644'
+    remote_src: true
+
+- name: Copy file repository for nexus
+  copy:
+    src: sources.list
+    dest: /etc/apt/sources.list
+    owner: root
+    group: root
+    mode: '0644'

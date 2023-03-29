@@ -1,0 +1,10 @@
+---
+# tasks file for repository_nexus
+- name: Include Debian 8/9 variables.
+  include_tasks: "Debian.yml"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Include RedHat Family 8+ variables.
+  include_tasks: "RedHat.yml"
+  when: ansible_facts['os_family'] == "RedHat"
+

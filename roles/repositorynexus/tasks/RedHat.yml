@@ -1,0 +1,17 @@
+- name: Copy CentOS 7 file repository for nexus
+  copy:
+    src: nexus_centos7.repo
+    dest: /etc/yum.repos.d/nexus_centos7.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: (ansible_facts['os_family'] == "RedHat" and ansible_facts['distribution_major_version'] == "7")
+
+- name: Copy CentOS 8 file repository for nexus
+  copy:
+    src: nexus_centos8.repo
+    dest: /etc/yum.repos.d/nexus_centos8.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: (ansible_facts['os_family'] == "RedHat" and ansible_facts['distribution_major_version'] == "8")

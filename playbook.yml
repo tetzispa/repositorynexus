@@ -1,0 +1,22 @@
+---
+- hosts: servers
+  become: yes
+  gather_facts: True
+  remote_user: myuser
+
+  pre_tasks:
+    - name:
+      shell: pwd
+      register: shellout
+      changed_when: false
+      delegate_to: localhost
+      run_once: true
+
+    - name: Create the log file for this run
+      shell: /bin/bash -l -c "mv {{ shellout.stdout }}/ansible.log  {{ shellout.stdout }}/{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}-ansible.log"
+      delegate_to: localhost
+      run_once: true
+
+  roles:
+    - { role: repositorynexus }
+
